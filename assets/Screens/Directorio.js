@@ -9,7 +9,7 @@ import PersonDisplayer from '../Components/Directory/PersonDisplayer';
 // 'https://cuceimobile.space/directorio.html'
 // <WebView source={{uri: 'https://cuceimobile.space/directorio.html'}} style={{width: 350, backgroundColor: globalColor.background}}>
 // </WebView>
-        
+//Testing        
 
 
 export default class Directorio extends Component {
