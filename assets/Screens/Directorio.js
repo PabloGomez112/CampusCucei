@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, FlatList } from 'react-native';
+import React, { Component, useEffect, useState } from 'react';
+import { View, Text, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
 import Navbar from '../Components/Navbar';
-import { WebView } from 'react-native-webview';
 import { globalColor } from '../GlobalStyles';
-import { directoryJson, jsonParsed } from '../DirectoryParsed';
 import PersonDisplayer from '../Components/Directory/PersonDisplayer';
 
 // 'https://cuceimobile.space/directorio.html'
@@ -12,31 +10,68 @@ import PersonDisplayer from '../Components/Directory/PersonDisplayer';
 //Testing        
 
 
-export default class Directorio extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
+export default function Directorio() {
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState([])
+
+  // fetch('https://apicucei.onrender.com/directorio')
+  
+ async function loadDirectory(){
+    try{
+      const response = await fetch('https://apicucei.onrender.com/directorio');
+      const data = await response.json();
+      return data;
+    }
+    catch (error){
+      console.error('Error fetching Directory: ', error)
+      return [];
+    }
   }
 
-  render() {
+    useEffect(() => {
+      loadDirectory().then(dataReceived => {
+        setData(dataReceived);
+        setIsLoading(false);
+      })
+    }, [])
+
+
+    function loading()
+    {
+      return (<View style={styles.MainContainer}>
+            <ActivityIndicator size={'large'}/>
+          </View>)
+    }
+
+    function component()
+    {
+
     return (
       <View style={styles.MainContainer}>
         <View style={styles.body}>
         <Text style={styles.title}> Directorio </Text>
         <View style={{marginBottom: 60}}>
-          <FlatList data={jsonParsed} 
+          <FlatList data={data} 
           showsVerticalScrollIndicator={false}
           renderItem={({item}) => <PersonDisplayer photoUri={item.image_url} name={item.name} 
-          position={item.position} phone={item.phone} email={item.email}/>}
-          keyExtractor={(item, index) => `${item.name}-${index.toString()}`}/>
+          position={item.position} phone={item.phone} email={item.email} header={item.header}/>}
+          keyExtractor={(item, index) => `${item.name}-${index}`}/>
         </View>
         </View>
         <Navbar />
       </View>
     );
   }
+
+  if (isLoading) {
+    return loading()
+  }
+  else{
+    return component()
+  }
 }
+
 
 
 const styles = StyleSheet.create({

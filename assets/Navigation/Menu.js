@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-import { createStaticNavigation, NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Principal from '../Screens/Principal';
 import Directorio from '../Screens/Directorio';
 import SplashScreen from '../Screens/SplashScreen';
 import Video from '../Screens/Video';
+import Profile from '../Screens/Profile';
+import Notifications from '../Screens/Notifications';
 
 function RootStack(){
     return (
@@ -33,6 +35,8 @@ export default class Menu extends Component {
             <Stack.Screen name='inicio' component={Principal} options={{headerShown: false}} />
             <Stack.Screen name='directorio' component={Directorio} options={{headerShown: false}}/>
             <Stack.Screen name='video' component={Video} options={{headerShown: false}}/>
+            <Stack.Screen name='perfil' component={Profile} options={{headerShown: false}}/>
+            <Stack.Screen name='notificacion' component={Notifications} options={{headerShown: false}}/>
         </Stack.Navigator>
         </NavigationContainer>
     );

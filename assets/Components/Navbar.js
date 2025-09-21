@@ -43,11 +43,15 @@ export default function Navbar() {
         navigation.navigate('inicio')
     }
 
-    function handleDirectoryButton()
+    function handleProfileButton()
     {
-        navigation.navigate('directorio')
+        navigation.navigate('perfil')
     }
   
+    function handleNotificationButton()
+    {
+      navigation.navigate('notificacion')
+    }
 
 
 
@@ -65,7 +69,7 @@ export default function Navbar() {
         
         </TouchableOpacity>
         
-        <TouchableOpacity onPress={handleDirectoryButton}>
+        <TouchableOpacity onPress={handleNotificationButton}>
         {
           route.name === 'extra' ?( 
           <IconAnimatedNavbar actualRoute={route.name} routeName={'extra'}
@@ -77,12 +81,12 @@ export default function Navbar() {
   
 
 
-        <TouchableOpacity onPress={handleDirectoryButton}>
+        <TouchableOpacity onPress={handleProfileButton}>
         {
-          route.name === 'directorio' ?( 
-          <IconAnimatedNavbar actualRoute={route.name} routeName={'directorio'}
+          route.name === 'perfil' ?( 
+          <IconAnimatedNavbar actualRoute={route.name} routeName={'perfil'}
           refValue={showAnim} icon={iconList.profileIcon}/>) :
-          (<IconStaticNavbar actualRoute={route.name} routeName={'directorio'} icon={iconList.profileIcon}/>) 
+          (<IconStaticNavbar actualRoute={route.name} routeName={'perfil'} icon={iconList.profileIcon}/>) 
 
         }        
         </TouchableOpacity>

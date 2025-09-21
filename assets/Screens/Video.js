@@ -45,8 +45,6 @@ export default function Video() {
       </View>)
   }
 
-
-
 const styles = StyleSheet.create({
      MainContainer: {
             flex: 1,

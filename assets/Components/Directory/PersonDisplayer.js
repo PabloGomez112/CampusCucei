@@ -1,22 +1,20 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native'
-import React, { useRef, useState, useCallback } from 'react'
+import React, { useRef, useState, useCallback, useEffect } from 'react'
 import { globalColor } from '../../GlobalStyles'
 import { useFocusEffect } from '@react-navigation/native';
 
-
-
-
-
-
-export default function PersonDisplayer({photoUri, name, position, phone, email}) {
+export default function PersonDisplayer({photoUri, name, position, phone, email, header}) {
 
   const [open, setOpen] = useState(false);
+  const [dynamicFont, setDynamicFont] = useState(13)
+  const [headerText, setHeaderText] = useState('')
 
 
   function handlePress()
   {
     setOpen(!open)
   }
+
 
   function minimalComponent()
   {
@@ -33,6 +31,22 @@ export default function PersonDisplayer({photoUri, name, position, phone, email}
 
       <View style={styles.buttonArea}>
       </View>
+
+      <Text numberOfLines={1} ellipsizeMode='tail' style={[styles.nameText, {color: 'white', 
+      fontSize: dynamicFont, 
+      padding: 10, 
+      backgroundColor: globalColor.primary, 
+      borderRadius: 12, 
+      alignSelf: 'center', 
+      position: 'absolute',
+      textAlign: 'center',
+      marginBottom: 160,
+      elevation: 3,
+      flexShrink: 1,
+      flexWrap: 'wrap',
+      width: '70%',
+      }]}>{header}</Text>
+      
 
       </TouchableOpacity>
     </View>)
@@ -52,6 +66,21 @@ export default function PersonDisplayer({photoUri, name, position, phone, email}
         <Text style={styles.contactText}>{phone}</Text>
         <Text style={styles.contactText}>{email}</Text>
       </View>
+
+      <Text numberOfLines={2} ellipsizeMode='tail' style={[styles.nameText, {color: 'white', 
+      fontSize: dynamicFont, 
+      padding: 10, 
+      backgroundColor: globalColor.primary, 
+      borderRadius: 12, 
+      alignSelf: 'center', 
+      position: 'absolute',
+      textAlign: 'left',
+      marginBottom: -170,
+      marginRight: 0,
+      elevation: 3,
+      flexShrink: 1,
+      flexWrap: 'wrap',
+      width: '96%'}]}>{header}</Text>
       </TouchableOpacity>
     </View>)
   }
@@ -64,6 +93,7 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     marginBottom:10,
+    paddingTop: 30,
   },
   container: {
     width: 400,
