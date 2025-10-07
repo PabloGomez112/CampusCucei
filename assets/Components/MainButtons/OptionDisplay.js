@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
         backgroundColor: globalColor.primary,
         borderRadius: 38,
         opacity: 0.6,
+        elevation: 3,
 
     },
 
@@ -78,7 +79,6 @@ const styles = StyleSheet.create({
     },
 
     nextButton: {
-
         width: 40,
         height: 40,
         position: 'absolute',

@@ -5,12 +5,15 @@ import { View, Text, StyleSheet } from 'react-native';
 import Navbar from '../Components/Navbar';
 import { globalColor } from '../GlobalStyles';
 import OptionDisplay from '../Components/MainButtons/OptionDisplay';
+import BackButton from '../Components/GeneralButtons/BackButton';
+
 export default function Principal (){
     const navigation = useNavigation();
 
     const iconsList = {
       directoryIcon: require('../navbar/book-alt.png'),
-      videoIcon: require('../Icons/Main/video.png')
+      videoIcon: require('../Icons/Main/video.png'),
+      mapIcon: require('../Icons/Main/map.png')
     }
 
     function gotoDirectory()
@@ -21,6 +24,11 @@ export default function Principal (){
     function gotoVideo()
     {
       navigation.navigate('video')
+    }
+
+    function gotoMapa()
+    {
+      navigation.navigate('mapa')
     }
 
 
@@ -41,6 +49,15 @@ export default function Principal (){
           icon={iconsList.videoIcon}
           iconBackground='purple'
           command={gotoVideo}/>
+
+
+            <OptionDisplay title={'Mapa'} 
+          description={'Visualiza los modulos del plantel.'}
+          icon={iconsList.mapIcon}
+          iconBackground='green'
+          command={gotoMapa}/>
+        
+
         </View>
         </View>
         <Navbar />

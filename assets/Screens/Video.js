@@ -5,10 +5,9 @@ import { globalColor } from '../GlobalStyles'
 import WebView from 'react-native-webview'
 import { supabase } from '../API/SupabaseClient'
 
-
 export default function Video() {
   const [videoUri, setVideoUri] = useState('');
-
+  
   useEffect(() => {
     const fetchVideo = async () =>{
     try {
@@ -38,7 +37,12 @@ export default function Video() {
       <View style={styles.MainContainer}>
         <View style={styles.body}>
           <View style={{height: 260}}>
-          <WebView startInLoadingState={true} renderLoading={loadingScreen} source={{uri: videoUri}} style={{width: 350, backgroundColor: globalColor.background}}></WebView>
+          <WebView 
+          startInLoadingState={true} 
+          renderLoading={loadingScreen} 
+          source={{uri: videoUri}} 
+          style={{width: 350, backgroundColor: globalColor.background}}> 
+          </WebView>
           </View>
         </View>
       <Navbar></Navbar>
@@ -69,7 +73,6 @@ const styles = StyleSheet.create({
         },
     
         listContainer: {
-          marginTop: 20,
-    
+          marginTop: 20,  
         }
 })

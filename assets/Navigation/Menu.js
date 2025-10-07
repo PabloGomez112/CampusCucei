@@ -8,6 +8,7 @@ import SplashScreen from '../Screens/SplashScreen';
 import Video from '../Screens/Video';
 import Profile from '../Screens/Profile';
 import Notifications from '../Screens/Notifications';
+import Map from '../Screens/Map';
 
 function RootStack(){
     return (
@@ -37,6 +38,7 @@ export default class Menu extends Component {
             <Stack.Screen name='video' component={Video} options={{headerShown: false}}/>
             <Stack.Screen name='perfil' component={Profile} options={{headerShown: false}}/>
             <Stack.Screen name='notificacion' component={Notifications} options={{headerShown: false}}/>
+            <Stack.Screen name='mapa' component={Map} options={{headerShown: false}}/>
         </Stack.Navigator>
         </NavigationContainer>
     );
