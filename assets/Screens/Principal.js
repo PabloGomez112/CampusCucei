@@ -56,8 +56,6 @@ export default function Principal (){
           icon={iconsList.mapIcon}
           iconBackground='green'
           command={gotoMapa}/>
-        
-
         </View>
         </View>
         <Navbar />

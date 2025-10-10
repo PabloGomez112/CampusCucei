@@ -8,7 +8,7 @@ export const lightColor = {
     primary: "#539fb2",
     secondary: "#ae9cd3",
     accent: "#a676c1",
-
 }
+
 
 export const globalColor = lightColor
