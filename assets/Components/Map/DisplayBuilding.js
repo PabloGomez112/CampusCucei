@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, Animated } from 'react-native'
 import React, { useEffect, useRef } from 'react'
 import { globalColor } from '../../GlobalStyles'
-
+import MyCarousel from './Carrousel'
 
 
 
@@ -33,7 +33,7 @@ export default function DisplayBuilding({imgUri, title, description, hideCallbac
     <Animated.View style={[styles.container, {transform: [{scale: valueAppear}]}]}>
       
     <View>
-      <TouchableOpacity onPress={hideDisplayer} style={{position: 'absolute', zIndex: 101, paddingBottom: 200}}>
+      <TouchableOpacity onPress={hideDisplayer} style={{position: 'absolute', zIndex: 1002, paddingBottom: 200}}   pressRetentionOffset={{ top: 50, left: 50, right: 50, bottom: 50 }}>
             <Image source={closeIcon} style={{overflow: 'hidden', width:250, height: 200, left: '820%', bottom: '50%'}} width={100} height={100}></Image>
       </TouchableOpacity>
       </View>
@@ -41,8 +41,10 @@ export default function DisplayBuilding({imgUri, title, description, hideCallbac
       <View>
         <Text style={styles.header}>{title}</Text>
         <Text style={styles.descriptionText}>{description}</Text>
-        <Image style={{alignSelf: 'center', borderRadius: 15, elevation: 4}} source={{uri: imgUri}} width={800} height={450}></Image> 
         
+        <View style={{top: 200}}>
+        <MyCarousel data={imgUri}></MyCarousel>
+        </View>
       </View>
 
       

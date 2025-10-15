@@ -3,7 +3,7 @@ import React from 'react'
 import { globalColor } from '../../GlobalStyles'
 
 export default function OptionDisplay({title, description, icon, command, 
-    iconBackground = globalColor.primary}) {
+    iconBackground = globalColor.primary, title_size=32}) {
   return (
     <TouchableOpacity style={styles.container} onPress={command}> 
         <View style={styles.content}>
@@ -11,7 +11,7 @@ export default function OptionDisplay({title, description, icon, command,
         <Image source={icon} style={styles.icon}></Image>
         </View>
         <View style={styles.infoText}>
-            <Text style={styles.mainTitle}>{title}</Text>
+            <Text style={[styles.mainTitle, {fontSize: title_size}]}>{title}</Text>
             <Text style={styles.descriptionText}>{description}</Text>
         </View>
         <View style={styles.buttonArea}>

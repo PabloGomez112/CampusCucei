@@ -1,9 +1,11 @@
-import { StyleSheet, Text, View, Image, ImageBackground } from "react-native";
-import React, { useState } from "react";
+import { StyleSheet, View, Image} from "react-native";
+import React, { useRef, useState } from "react";
 import { globalColor } from "../GlobalStyles";
 import MapIndicator from "../Components/Map/MapIndicator";
 import DisplayBuilding from "../Components/Map/DisplayBuilding";
 import { supabase } from "../API/SupabaseClient";
+import { Gesture, GestureDetector, GestureHandlerRootView } from "react-native-gesture-handler";
+import Animated, {useSharedValue, useAnimatedStyle, withTiming} from "react-native-reanimated";
 
 export default function Map() {
   const imagen_mapa = require("../Images/mapa_2024.png");
@@ -14,14 +16,30 @@ export default function Map() {
   );
   const [infoDisplayerVisible, setInfoDisplayerVisibility] = useState(false);
 
+
+  const zoomValue = useSharedValue(0.5)
+  const mapXCenter = useRef(0)
+  const mapYCenter = useRef(0)
+  const focalX = useSharedValue(0)
+  const focalY = useSharedValue(0)
+
+  const pinchZoom = Gesture.Pinch().onUpdate((e) => 
+  {
+    zoomValue.value = e.scale
+  })
+
+  const zoomStyle = useAnimatedStyle(() => ({
+    transform: [{scale: zoomValue.value}]
+  }))
+
   async function updateDisplay(id) {
 
     try {
       const { data: photoData, error: error } = await supabase
         .from("buildings_photos")
         .select("photo_uri")
-        .eq("id_building", id)
-        .single();
+        .eq("id_building", id);
+
       const { data: buildingData, error: errorBuilding } = await supabase
         .from("building")
         .select("*")
@@ -34,7 +52,7 @@ export default function Map() {
         throw errorBuilding;
       } else {
         if (photoData) {
-          setImageUri(photoData.photo_uri);
+          setImageUri(photoData.map(item => item.photo_uri));
         } else {
           setImageUri("");
         }
@@ -61,18 +79,27 @@ export default function Map() {
   }
 
   return (
-      <View style={[styles.mainContainer]}>
-        {infoDisplayerVisible && (
-          <DisplayBuilding
-            title={displayTitle}
-            description={displayDescription}
-            imgUri={imageUri}
-            hideCallback={hideInfoDisplayer}
-            
-          />
-        )}
+    <GestureHandlerRootView style={{flex: 1, transform: [{rotate: '90deg'}]}}>
+    <View style={{ zIndex: 100}}>
+            {infoDisplayerVisible && (
+    <View style={{transform: [{scale: 0.52}], top: 260}}>
+      <DisplayBuilding
+        title={displayTitle}
+        description={displayDescription}
+        imgUri={imageUri}
+        hideCallback={hideInfoDisplayer}
+      />
+    </View>)}
+    </View>
 
-        <Image source={imagen_mapa} />
+      <GestureDetector gesture={pinchZoom}>
+      <Animated.View style={[styles.mainContainer, zoomStyle]}>
+        
+        <Image source={imagen_mapa} onLayout={(event) => {
+          const {width, height} = event.nativeEvent.layout;
+          mapXCenter.value = width / 2
+          mapYCenter.value = height / 2
+        }}/>
         
 
         <MapIndicator
@@ -144,11 +171,141 @@ export default function Map() {
           onPressCallback={() => updateDisplay(12)}
         />
 
+        <MapIndicator
+          leftPadding={-220}
+          upPadding={180}
+          onPressCallback={() => updateDisplay(17)}
+        />
+
+        <MapIndicator
+          leftPadding={-260}
+          upPadding={170}
+          onPressCallback={() => updateDisplay(18)}
+        />
+
+
+        <MapIndicator
+          leftPadding={-300}
+          upPadding={160}
+          onPressCallback={() => updateDisplay(19)}
+        />
+
+        <MapIndicator
+          leftPadding={-310}
+          upPadding={120}
+          onPressCallback={() => updateDisplay(20)}
+        />
+
+
+
+        <MapIndicator
+          leftPadding={-340}
+          upPadding={100}
+          onPressCallback={() => updateDisplay(21)}
+        />
+
+        <MapIndicator
+          leftPadding={-385}
+          upPadding={210}
+          onPressCallback={() => updateDisplay(33)}
+        />
+
+
+        <MapIndicator
+          leftPadding={-430}
+          upPadding={200}
+          onPressCallback={() => updateDisplay(22)}
+        />
+
+        <MapIndicator
+          leftPadding={-335}
+          upPadding={260}
+          onPressCallback={() => updateDisplay(23)}
+        />
+
+
+        <MapIndicator
+          leftPadding={-380}
+          upPadding={330}
+          onPressCallback={() => updateDisplay(25)}
+        />
+
+
+        <MapIndicator
+          leftPadding={-390}
+          upPadding={270}
+          onPressCallback={() => updateDisplay(26)}
+        />
+
+
+        <MapIndicator
+          leftPadding={-230}
+          upPadding={50}
+          onPressCallback={() => updateDisplay(34)}
+        />
+
+
+        <MapIndicator
+          leftPadding={-200}
+          upPadding={70}
+          onPressCallback={() => updateDisplay(28)}
+        />
+
+
+
+        <MapIndicator
+          leftPadding={-140}
+          upPadding={100}
+          onPressCallback={() => updateDisplay(32)}
+        />
+
+
+        <MapIndicator
+          leftPadding={-180}
+          upPadding={100}
+          onPressCallback={() => updateDisplay(35)}
+        />
+
+
+        <MapIndicator
+          leftPadding={-140}
+          upPadding={50}
+          onPressCallback={() => updateDisplay(29)}
+        />
+
+
+        <MapIndicator
+          leftPadding={-170}
+          upPadding={20}
+          onPressCallback={() => updateDisplay(36)}
+        />
+
+
+
+        <MapIndicator
+          leftPadding={330}
+          upPadding={150}
+          onPressCallback={() => updateDisplay(5)}
+        />
 
         
 
+        <MapIndicator
+          leftPadding={390}
+          upPadding={150}
+          onPressCallback={() => updateDisplay(3)}
+        />
+
+
+
+
         
-      </View>
+      </Animated.View>
+      </GestureDetector>
+
+
+
+      </GestureHandlerRootView>
   );
 }
 
@@ -158,6 +315,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: globalColor.background,
-    transform: [{ rotate: "90deg"}, { scale: 0.5}],
+    transform: [{scale: 0.5}],
   },
 });

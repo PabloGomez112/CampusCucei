@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import Menu from './assets/Navigation/Menu'

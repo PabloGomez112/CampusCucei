@@ -13,7 +13,8 @@ export default function Principal (){
     const iconsList = {
       directoryIcon: require('../navbar/book-alt.png'),
       videoIcon: require('../Icons/Main/video.png'),
-      mapIcon: require('../Icons/Main/map.png')
+      mapIcon: require('../Icons/Main/map.png'),
+      profileIcon: require('../navbar/user.png')
     }
 
     function gotoDirectory()
@@ -31,6 +32,11 @@ export default function Principal (){
       navigation.navigate('mapa')
     }
 
+    function gotoProfile()
+    {
+      navigation.navigate('perfil')
+
+    }
 
     return (
       <View style={styles.MainContainer}>
@@ -51,11 +57,20 @@ export default function Principal (){
           command={gotoVideo}/>
 
 
-            <OptionDisplay title={'Mapa'} 
+          <OptionDisplay title={'Mapa'} 
           description={'Visualiza los modulos del plantel.'}
           icon={iconsList.mapIcon}
           iconBackground='green'
           command={gotoMapa}/>
+
+
+        <OptionDisplay title={'Iniciar sesión'}
+
+          description={'Ingresa a tu cuenta'}
+          icon={iconsList.profileIcon}
+          iconBackground='yellow'
+          command={gotoProfile}
+          title_size={28}/>
         </View>
         </View>
         <Navbar />
