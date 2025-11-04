@@ -1,14 +1,16 @@
 import { Button } from '@react-navigation/elements';
 import { useNavigation } from '@react-navigation/native';
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Navbar from '../Components/Navbar';
 import { globalColor } from '../GlobalStyles';
 import OptionDisplay from '../Components/MainButtons/OptionDisplay';
 import BackButton from '../Components/GeneralButtons/BackButton';
+import { AuthContext } from '../Components/General/AuthContext';
 
 export default function Principal (){
     const navigation = useNavigation();
+    const {isSignedIn} = useContext(AuthContext);
 
     const iconsList = {
       directoryIcon: require('../navbar/book-alt.png'),
@@ -63,15 +65,24 @@ export default function Principal (){
           iconBackground='green'
           command={gotoMapa}/>
 
-
-        <OptionDisplay title={'Iniciar sesión'}
-
+        { isSignedIn ? 
+          <OptionDisplay title={'Perfil'}
+          description={'Revisa informacion del estudiante'}
+          icon={iconsList.profileIcon}
+          iconBackground='yellow'
+          command={gotoProfile}
+          title_size={28}/> 
+ 
+         :
+         <OptionDisplay title={'Iniciar sesión'}
           description={'Ingresa a tu cuenta'}
           icon={iconsList.profileIcon}
           iconBackground='yellow'
           command={gotoProfile}
-          title_size={28}/>
-        </View>
+          title_size={28}/> 
+        
+        }
+          </View>
         </View>
         <Navbar />
       </View>

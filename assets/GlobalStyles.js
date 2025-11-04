@@ -12,3 +12,4 @@ export const lightColor = {
 
 
 export const globalColor = lightColor
+
