@@ -21,8 +21,11 @@ import { PieChart } from "react-native-gifted-charts";
 
 import { ACADEMIC_DATA_FILENAME } from "../Components/General/Configuration";
 import { PERSONAL_DATA_FILENAME } from "../Components/General/Configuration";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Profile() {
+  const navigation = useNavigation();
+
   const [code, setCode] = useState("");
   const [password, setPassword] = useState("");
   const [notificationVisible, setNotificationVisible] = useState(false);
@@ -50,9 +53,15 @@ export default function Profile() {
   } = useContext(AuthContext);
 
   const creditChartColors = {
-    remaining: "#EC1325",
-    current: "#25DA3A",
+    remaining: "#FFC50F",
+    current: "#63A361",
   };
+
+
+  function gotoSubjects()
+  {
+    navigation.navigate('materias');
+  }
 
   function setDataToStates() {
     if (Object.keys(academicData).length === 0) return;
@@ -140,6 +149,27 @@ export default function Profile() {
         text: optativaAbiertaJson.faltantes,
       },
     ];
+
+    setChartsInfo([
+      { nombre: "Basica común", data: basicoComunData.current },
+      {
+        nombre: "Basica particular obligatoria",
+        data: basicaParticularObligatorio.current,
+      },
+      {
+        nombre: "Especializante obligatoria",
+        data: especializanteObligatoria.current,
+      },
+
+      {
+        nombre: "Especializante selectiva",
+        data: especializanteSelectiva.current,
+      },
+      {
+        nombre: "Optativa abierta",
+        data: especializanteOptativaAbierto.current,
+      },
+    ]);
 
     setLoadData(true);
   }
@@ -320,187 +350,32 @@ export default function Profile() {
                       gap: 50,
                     }}
                   >
-                    <View
-                      style={{
-                        alignSelf: "center",
-                        backgroundColor: globalColor.background,
-                        padding: 10,
-                        borderRadius: 30,
-                        marginTop: 15,
-                        marginBottom: 15,
-                      }}
-                    >
-                      {/* Inicia Creditos generales */}
+                    {renderPieChart(
+                      "Creditos generales",
+                      pieData.current,
+                      academicData.creditos,
+                      academicData.creditosRequeridos - academicData.creditos,
+                      academicData.creditosRequeridos,
+                      "4343"
+                    )}
 
-                      <Text style={{ fontSize: 20 }}>Creditos generales</Text>
-                      <PieChart
-                        donut
-                        textColor="white"
-                        showText
-                        radius={128}
-                        textSize={20}
-                        data={pieData.current}
-                        showValuesAsLabels
-                        focusOnPress
-                      />
-
-                      <View style={{ marginTop: 20 }}>
-                        <View
-                          style={{ flexDirection: "row", alignItems: "center" }}
-                        >
-                          {renderDot(creditChartColors.current)}
-                          <Text>
-                            Creditos actuales: {academicData.creditos}
-                          </Text>
-                        </View>
-                        <View
-                          style={{ flexDirection: "row", alignItems: "center" }}
-                        >
-                          {renderDot(creditChartColors.remaining)}
-                          <Text>
-                            Creditos faltantes:{" "}
-                            {academicData.creditosRequeridos -
-                              academicData.creditos}
-                          </Text>
-                        </View>
-
-                        <View
-                          style={{ flexDirection: "row", alignItems: "center" }}
-                        >
-                          <Text style={styles.legendImportant}>
-                            Creditos totales:{" "}
-                            {" " + academicData.creditosRequeridos}
-                          </Text>
-                        </View>
-                      </View>
-
-                      {/* Termina creditos generales */}
-                    </View>
-
-                    <View
-                      style={{
-                        alignSelf: "center",
-                        backgroundColor: globalColor.background,
-                        padding: 10,
-                        borderRadius: 30,
-                        marginTop: 15,
-                        marginBottom: 15,
-                      }}
-                    >
-                      {/* Inicia Creditos Formacion basica */}
-
-                      <Text style={{ fontSize: 20 }}>
-                        Creditos Basico comun
-                      </Text>
-                      <PieChart
-                        donut
-                        textColor="white"
-                        showText
-                        radius={128}
-                        textSize={20}
-                        data={basicoComunData.current}
-                        showValuesAsLabels
-                        focusOnPress
-                      />
-
-                      <View style={{ marginTop: 20 }}>
-                        <View
-                          style={{ flexDirection: "row", alignItems: "center" }}
-                        >
-                          {renderDot(creditChartColors.current)}
-                          <Text>
-                            Creditos actuales:{" "}
-                            {academicData.creditosAreas[0].creditos}
-                          </Text>
-                        </View>
-                        <View
-                          style={{ flexDirection: "row", alignItems: "center" }}
-                        >
-                          {renderDot(creditChartColors.remaining)}
-                          <Text>
-                            Creditos faltantes:{" "}
-                            {academicData.creditosAreas[0].faltantes}
-                          </Text>
-                        </View>
-
-                        <View
-                          style={{ flexDirection: "row", alignItems: "center" }}
-                        >
-                          <Text style={styles.legendImportant}>
-                            Creditos totales:{" "}
-                            {" " + academicData.creditosAreas[0].requeridos}
-                          </Text>
-                        </View>
-                      </View>
-
-                      {/* Termina creditos generales */}
-                    </View>
-
-                    <View
-                      style={{
-                        alignSelf: "center",
-                        backgroundColor: globalColor.background,
-                        padding: 10,
-                        borderRadius: 30,
-                        marginTop: 15,
-                        marginBottom: 15,
-                      }}
-                    >
-                      {/* Inicia Creditos Basico obligatoria */}
-
-                      <Text style={{ fontSize: 20 }}>
-                        Basico Particular Obligatorio
-                      </Text>
-                      <PieChart
-                        donut
-                        textColor="white"
-                        showText
-                        radius={128}
-                        textSize={20}
-                        data={basicaParticularObligatorio.current}
-                        showValuesAsLabels
-                        focusOnPress
-                      />
-
-                      <View style={{ marginTop: 20 }}>
-                        <View
-                          style={{ flexDirection: "row", alignItems: "center" }}
-                        >
-                          {renderDot(creditChartColors.current)}
-                          <Text>
-                            Creditos actuales:{" "}
-                            {academicData.creditosAreas[1].creditos}
-                          </Text>
-                        </View>
-                        <View
-                          style={{ flexDirection: "row", alignItems: "center" }}
-                        >
-                          {renderDot(creditChartColors.remaining)}
-                          <Text>
-                            Creditos faltantes:{" "}
-                            {academicData.creditosAreas[1].faltantes}
-                          </Text>
-                        </View>
-
-                        <View
-                          style={{ flexDirection: "row", alignItems: "center" }}
-                        >
-                          <Text style={styles.legendImportant}>
-                            Creditos totales:{" "}
-                            {" " + academicData.creditosAreas[0].requeridos}
-                          </Text>
-                        </View>
-                      </View>
-                      {/* Termina creditos basico particular obligatorio */}
-                    </View>
-
-
-                      
-
-
-
+                    {chartsInfo.map((value, index) =>
+                      renderPieChart(
+                        value.nombre,
+                        value.data,
+                        academicData.creditosAreas[index].creditos,
+                        academicData.creditosAreas[index].faltantes,
+                        academicData.creditosAreas[index].creditos +
+                          academicData.creditosAreas[index].faltantes,
+                        toString(index) + value.nombre
+                      )
+                    )}
+                    {/* Termina creditos generales */}
                   </View>
                 </ScrollView>
+              </View>
+              <View style={{marginTop: 50, marginLeft: 100, marginRight: 100, marginBottom: 50}}>
+              <Button title="Consultar materias" onPress={gotoSubjects}></Button>
               </View>
             </ScrollView>
           </View>
@@ -509,8 +384,58 @@ export default function Profile() {
       );
     } catch (e) {
       console.error("ERROR profile() -> ", e);
-      return <View></View>;
+      return (
+        <View>
+          <Text>Loading. . .</Text>
+        </View>
+      );
     }
+  }
+
+  function renderPieChart(name, data, current, remaining, total, key) {
+    return (
+      <View
+        key={key}
+        style={{
+          alignSelf: "center",
+          backgroundColor: globalColor.background,
+          padding: 10,
+          borderRadius: 30,
+          marginTop: 15,
+          marginBottom: 15,
+          elevation: 8
+        }}
+      >
+        <Text style={{ fontSize: 24, fontWeight: 'bold' }}>{name}</Text>
+        <PieChart
+          donut
+          textColor="white"
+          showText
+          radius={128}
+          textSize={20}
+          data={data}
+          showValuesAsLabels
+          focusOnPress
+        />
+
+        <View style={{ marginTop: 20 }}>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            {renderDot(creditChartColors.current)}
+            <Text>Creditos actuales: {current}</Text>
+          </View>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            {renderDot(creditChartColors.remaining)}
+            <Text>Creditos faltantes: {remaining}</Text>
+          </View>
+
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Text style={styles.legendImportant}>
+              Creditos requeridos: {" " + total}
+            </Text>
+          </View>
+        </View>
+      </View>
+    );
   }
 
   const renderDot = (color) => {
@@ -665,6 +590,7 @@ export default function Profile() {
                 )}
               </View>
             </View>
+
           </View>
 
           <Navbar />

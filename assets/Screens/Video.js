@@ -38,9 +38,10 @@ export default function Video() {
         <View style={styles.body}>
           <View style={{height: 260}}>
           <WebView 
+          
           startInLoadingState={true} 
           renderLoading={loadingScreen} 
-          source={{uri: videoUri}} 
+          source={{uri: videoUri, headers: {'Referrer-Policy': 'strict-origin-when-cross-origin'}}} 
           style={{width: 350, backgroundColor: globalColor.background}}> 
           </WebView>
           </View>

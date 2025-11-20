@@ -9,6 +9,7 @@ import Video from '../Screens/Video';
 import Profile from '../Screens/Profile';
 import Notifications from '../Screens/Notifications';
 import Map from '../Screens/Map';
+import Subject from '../Screens/Subject';
 
 function RootStack(){
     return (
@@ -39,6 +40,7 @@ export default class Menu extends Component {
             <Stack.Screen name='perfil' component={Profile} options={{headerShown: false}}/>
             <Stack.Screen name='notificacion' component={Notifications} options={{headerShown: false}}/>
             <Stack.Screen name='mapa' component={Map} options={{headerShown: false}}/>
+            <Stack.Screen name='materias' component={Subject} options = {{headerShown: false}}/>
         </Stack.Navigator>
         </NavigationContainer>
     );
