@@ -1,17 +1,94 @@
-# Resumen
-Campus Cucei fue una aplicacion creada para la comunidad estudiantil de la Universidad de Guadalajara.
-Esta aplicacion te permite ver el directorio de academicos mostrando información de contacto de cada uno de ellos.
-En otro de sus apartados muestra un video acerca de la Universidad de Guadalajara junto con una
-transcripción del mismo. A su vez cuenta con una versión del mapa y ubicaciones importantes para los estudiantes
-como lo son los modulos y edificios dentro de la aplicación.
-Si el estudiante decide iniciar sesión podra ver información acerca de su carrera como calificación, nombre, y promedio en
-cada una de sus materias cursadas.
+# 📱 Campus App – Portal Universitario Móvil
 
-## ¿Como funciona?
-La aplicación fue creada utilizando React Native junto con el framework de Expo, esta combinación me permitio desarrollar
-de una forma eficiente, resultando así en una entrega veloz.
-Tambien se utiliza el servicio de Supabase como BaaS, en el cual se consultan datos importantes
-relacionadas con la aplicación, como lo son imagenes de edificios del mapa, e información acerca de los mismos.
+Campus App es una aplicación desarrollada con React Native que sirve como portal integral para estudiantes de una universidad. Su objetivo es centralizar información académica, servicios y herramientas útiles dentro de un solo entorno móvil intuitivo y seguro.
 
-## Plataformas soportadas
-Android e IOS.
+
+[![Demo Video](https://img.youtube.com/vi/FWvOrMExz6w/0.jpg)](https://www.youtube.com/watch?v=FWvOrMExz6w))  
+
+(Video Demostrativo)
+
+
+# 🚀 Tecnologías Utilizadas
+  Área	Tecnología
+  Frontend	React Native • Expo
+  Backend	FastAPI (Render)
+  Base de Datos y	Supabase
+  Servicios Interactivos	Mapas, Multimedia, Directorio Académico
+  ✨ Funcionalidades Principales
+  🔹 Directorio Académico
+
+  Consulta de información de profesores y personal universitario.
+
+  Contacto directo desde la app.
+
+# 🎬 Sección de Videos
+
+  Repositorio de videos informativos y recursos audiovisuales del campus.
+
+# 🗺️ Mapa Interactivo
+
+  Ubicación de edificios, servicios y puntos de interés del campus.
+
+  Información contextual y navegación dentro del mapa.
+
+# 🔐 Inicio de Sesión Seguro
+
+  Autenticación con credenciales oficiales del estudiante.
+
+
+# 📚 Panel Académico
+
+Visualización de datos personales académicos:
+
+  Calificaciones
+
+  Materias inscritas
+
+  Información escolar relevante
+
+# 📦 Requisitos Previos
+  
+  Node.js LTS  
+  
+  Expo CLI / npx  
+  
+  Cuenta y proyecto en Supabase  
+  
+  Backend desplegado en Render  
+  
+
+# ▶️ Instalación y Ejecución
+# Clonar repositorio
+git clone https://github.com/PabloGomez112/CampusCucei
+
+# Instalar dependencias
+cd CampusCucei
+npm install
+
+# Ejecutar en entorno de desarrollo
+npx expo start
+
+# 🔧 Configuración de Entorno
+
+Crear archivo .env o usar variables seguras de Expo:
+
+EXPO_PUBLIC_SUPABASE_URL=...  
+
+EXPO_PUBLIC_SUPABASE_ANON_KEY=...  
+
+API_BASE_URL=https://backend-render-url/api  
+
+
+# 📌 Estado del Proyecto
+
+## 📍 Ya no habra mas actualizaciones, el proyecto llego a su fin.
+
+# 🤝 Contribuciones
+
+¡Las contribuciones son bienvenidas!
+Sientete libre de abrir un issue o enviar un pull request.
+
+# 📄 Licencia
+
+Este proyecto se distribuye bajo licencia MIT.
+Consulta el archivo LICENSE para más información.
