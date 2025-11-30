@@ -1,33 +1,28 @@
-import { StyleSheet, Text, View, ScrollView } from "react-native";
-import React, { useEffect, useState } from "react";
+import { StyleSheet, View, ScrollView } from "react-native";
+import React, { useContext, useEffect } from "react";
 import { globalColor } from "../GlobalStyles";
 import Navbar from "../Components/Navbar";
 import SubjectContainer from "../Components/Subject/SubjectContainer";
-import { useContext } from "react";
 import { AuthContext } from "../Components/General/AuthContext";
 import { useNavigation } from "@react-navigation/native";
 
 export default function Subject() {
   const {
     isSignedIn,
-    setSignIn,
-    personalData,
-    setPersonalData,
     academicData,
-    setAcademicData,
   } = useContext(AuthContext);
 
-  const [subjectList, setSubjectList] = useState({});
   const navigator = useNavigation();
 
+  useEffect(() => { 
+    if (!isSignedIn){
+      navigator.navigate('perfil');
+    }
+  }, [isSignedIn])
 
-  if (!isSignedIn)
-  {
-    navigator.navigate('perfil');
-  }
-  else
-  {
 
+  if (isSignedIn)
+  {
   return (
     <View style={styles.MainContainer}>
       <View style={styles.body}>

@@ -63,8 +63,8 @@ export default function PersonDisplayer({photoUri, name, position, phone, email,
       <View style={styles.infoArea}>
         <Text style={styles.nameText}>{name}</Text>
         <Text style={styles.positionText}>{position}</Text>
-        <Text style={styles.contactText}>{phone}</Text>
-        <Text style={styles.contactText}>{email}</Text>
+        <Text style={[styles.contactText,  {fontWeight: 'black'}]}>{phone}</Text>
+        <Text style={[styles.contactText,  {fontWeight: 'black'}]}>{email}</Text>
       </View>
 
       <Text numberOfLines={2} ellipsizeMode='tail' style={[styles.nameText, {color: 'white', 
